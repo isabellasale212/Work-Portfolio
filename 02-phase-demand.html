@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interactive Session Dashboard — Isabella Sale</title>
+<meta name="description" content="Turning athlete GPS and wearable data into load monitoring, session reports and readiness — with Python, Power BI and Excel. BSc Sport & Exercise Science, University of Bath.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Interactive Session Dashboard — Isabella Sale">
+<meta property="og:description" content="Turning athlete GPS and wearable data into load monitoring, session reports and readiness — with Python, Power BI and Excel. BSc Sport & Exercise Science, University of Bath.">
+<meta property="og:image" content="https://isabellasale212.github.io/Work-Portfolio/assets/og-image.png">
+<meta property="og:url" content="https://isabellasale212.github.io/Work-Portfolio/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://isabellasale212.github.io/Work-Portfolio/assets/og-image.png">
+
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%231C4E7C%27/%3E%3Ctext x=%2716%27 y=%2722%27 font-family=%27Helvetica,Arial,sans-serif%27 font-size=%2714%27 font-weight=%27700%27 fill=%27white%27 text-anchor=%27middle%27%3EIS%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap bar-in">
+    <a class="backlink" href="../index.html">← Isabella Sale · Portfolio</a>
+    <nav>
+      <a class="navlink" href="../index.html#work">All work</a>
+      <a class="navlink" href="../index.html#contact">Contact</a>
+      <button class="theme-btn" id="theme" aria-label="Toggle colour theme">Theme</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="cs-hero">
+    <div class="cs-topline">
+      <span class="idx" style="font-size:12px">02 / Matchday reporting</span>
+      <span class="prov real"><span class="d"></span> Real data · Catapult 10 Hz</span>
+    </div>
+    <h1>Interactive Session Dashboard</h1>
+    <p class="sub">A live, filterable dashboard built from the real Catapult session — click any coaching phase to drill into its physical demand. Built in the browser to mirror the Power BI reports I produce for staff.</p>
+    <div class="cs-meta">
+      <div class="m"><div class="mk">Role</div><div class="mv">Dashboard &amp; reporting</div></div>
+      <div class="m"><div class="mk">Skills</div><div class="mv">Power BI · DAX · data viz</div></div>
+      <div class="m"><div class="mk">Data</div><div class="mv">Catapult 10 Hz · 7 phases</div></div>
+      <div class="m"><div class="mk">Interaction</div><div class="mv">Filter · hover · drill-down</div></div>
+    </div>
+  </section>
+
+  <div class="cs-body">
+
+    <section class="cs-block" style="border-top:0;padding-top:8px">
+      <h2>Try it — click a phase</h2>
+      <p class="lead">Every tile, the trend line and the intensity split update to the phase you pick. Hover the chart to read the exact value at any moment of the session. This is the real 60-minute feed, not a mock-up.</p>
+
+      <div class="dsh" id="dsh">
+        <div class="dsh-controls" id="pills"><span class="lbl">Phase</span></div>
+        <div class="dsh-tiles" id="tiles"></div>
+        <div class="dsh-chart">
+          <div class="chead">
+            <span class="ctitle" id="chartTitle">Speed over time</span>
+            <span class="toggle"><button id="mSpeed" class="on">Speed</button><button id="mHr">Heart rate</button></span>
+          </div>
+          <svg id="chart" viewBox="0 0 720 250" role="img" aria-label="Interactive trend chart of the session"></svg>
+        </div>
+        <div class="dsh-zones">
+          <div class="ztitle" id="zTitle">Speed-zone distribution</div>
+          <div class="zbar" id="zbar" aria-label="Speed zone distribution"></div>
+          <div class="zlegend">
+            <span><i class="swatch" style="background:var(--cool)"></i> Z1 &lt;6</span>
+            <span><i class="swatch" style="background:#6E9AC1"></i> Z2 6–12</span>
+            <span><i class="swatch" style="background:var(--warm)"></i> Z3 12–15</span>
+            <span><i class="swatch" style="background:var(--hot)"></i> Z4 15–20</span>
+            <span><i class="swatch" style="background:#8E2E24"></i> Z5 &gt;20</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-block">
+      <h2>The question it answers</h2>
+      <div class="prose">
+        <p>A session total tells you how much an athlete did — not <strong>when</strong>. This dashboard splits the feed on Catapult’s phase flag so staff can see exactly where the demand sits, and sequence the training week so high-speed exposure is deliberate rather than accidental.</p>
+        <ul>
+          <li><b>Segmented</b> on the phase flag, with distance from the odometer and peak speed per block.</li>
+          <li><b>Cross-filtered</b> — pick a phase and every metric, the trend and the zone split recompute to that block.</li>
+          <li><b>Readable in seconds</b> — the shape a coach needs before the shape a spreadsheet gives.</li>
+        </ul>
+      </div>
+      <div class="callout">
+        <div class="ct">Insight the drill-down surfaces</div>
+        <p>Peak speed of <strong>21.0 km/h</strong> came in <strong>movement prep</strong>, not the game — warm-up design already exposes athletes to near-maximal velocity, which matters for hamstring-injury management. You only see that by filtering to the phase.</p>
+      </div>
+    </section>
+
+    <section class="cs-block">
+      <h2>On the tooling</h2>
+      <div class="prose">
+        <p>In a club, I build this in <strong>Power BI</strong> — Power Query to shape the export, DAX measures for distance and peak speed per phase, cross-filtering between visuals. I rebuilt it here as a live web app so you can actually interact with it in a portfolio, on the same real data and the same modelling logic. A native <code>.pbix</code> is available on request.</p>
+        <p><strong>Skills demonstrated:</strong> data shaping, measure design, cross-filtered interaction, and information design for a non-technical audience.</p>
+      </div>
+    </section>
+
+    <nav class="cs-nav">
+      <a href="01-gps-session.html">← GPS Session Report</a>
+      <a href="03-acwr-load.html">Next: Training Load Monitor →</a>
+    </nav>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot-in">
+    <span>© 2026 Isabella Sale</span>
+    <span>Python · Power BI · Excel · GPS</span>
+  </div>
+</footer>
+
+<script src="../assets/session_data.js"></script>
+<script src="../assets/site.js"></script>
+<script>
+(function(){
+  var S = window.SESSION; if(!S) return;
+  var ZC = ["var(--cool)","#6E9AC1","var(--warm)","var(--hot)","#8E2E24"];
+  var sel = "all";      // "all" or phase index
+  var metric = "speed"; // "speed" | "hr"
+
+  function css(v){ return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+
+  // phase time ranges from the series
+  var pranges = S.phases.map(function(_,i){
+    var ts = S.series.filter(function(d){return d.p===i;}).map(function(d){return d.t;});
+    return ts.length ? {t0:Math.min.apply(null,ts), t1:Math.max.apply(null,ts)} : {t0:0,t1:0};
+  });
+
+  // ---- pills ----
+  var pills = document.getElementById("pills");
+  function addPill(label, val){
+    var b=document.createElement("button"); b.className="pill"+(val===sel?" active":""); b.textContent=label; b.dataset.v=val;
+    b.onclick=function(){ sel=val; render(); };
+    pills.appendChild(b);
+  }
+  addPill("Whole session","all");
+  S.phases.forEach(function(p,i){ addPill(p.name, String(i)); });
+
+  // ---- tiles ----
+  function tilesData(){
+    if(sel==="all"){ var t=S.total; return [
+      ["Distance", t.dist.toLocaleString(), " m"], ["Duration", t.dur, " min"],
+      ["Peak speed", t.peak, " km/h"], ["Avg HR", t.avg_hr, " bpm"], ["Player Load", t.pl, " au"]]; }
+    var p=S.phases[+sel]; return [
+      ["Distance", p.dist_m.toLocaleString(), " m"], ["Duration", p.dur_min, " min"],
+      ["Peak speed", p.peak_kmh, " km/h"], ["Avg HR", p.avg_hr, " bpm"], ["Player Load", p.pl, " au"]];
+  }
+  function renderTiles(){
+    var host=document.getElementById("tiles"); host.innerHTML="";
+    tilesData().forEach(function(d){
+      var el=document.createElement("div"); el.className="dtile";
+      el.innerHTML='<div class="dl">'+d[0]+'</div><div class="dn">'+d[1]+'<small>'+d[2]+'</small></div>';
+      host.appendChild(el);
+    });
+  }
+
+  // ---- zones ----
+  function renderZones(){
+    var z = sel==="all"
+      ? S.phases.reduce(function(a,p){ return p.zones.map(function(v,i){return a[i]+v;}); },[0,0,0,0,0])
+      : S.phases[+sel].zones;
+    var tot = z.reduce(function(a,b){return a+b;},0)||1;
+    var bar=document.getElementById("zbar"); bar.innerHTML="";
+    z.forEach(function(v,i){ var s=document.createElement("i"); s.style.width=(100*v/tot)+"%"; s.style.background=ZC[i]; s.title=Math.round(v)+" m"; bar.appendChild(s); });
+    document.getElementById("zTitle").textContent = "Speed-zone distribution" + (sel==="all"?"":" · "+S.phases[+sel].name);
+  }
+
+  // ---- chart ----
+  var chart=document.getElementById("chart");
+  var VW=720, VH=250, PX=44, PY=16, PB=210;
+  function xs(t){ return PX + (t/S.total.dur)*(VW-PX-14); }
+  function render(){
+    document.querySelectorAll(".pill").forEach(function(b){ b.classList.toggle("active", b.dataset.v===String(sel)); });
+    renderTiles(); renderZones();
+    document.getElementById("chartTitle").textContent = (metric==="speed"?"Speed":"Heart rate")+" over time"+(sel==="all"?"":" · "+S.phases[+sel].name);
+    document.getElementById("mSpeed").classList.toggle("on",metric==="speed");
+    document.getElementById("mHr").classList.toggle("on",metric==="hr");
+
+    var line=css("--line"), line2=css("--line2"), mute=css("--mute"), accent=css("--accent"), hot=css("--hot"), warm=css("--warm");
+    var key = metric==="speed" ? "v" : "hr";
+    var maxY = metric==="speed" ? 22 : 175, minY = metric==="speed" ? 0 : 90;
+    function ys(val){ return PB - (val-minY)/(maxY-minY)*(PB-PY); }
+    var s="";
+    // phase bands
+    pranges.forEach(function(r,i){
+      var dim = (sel!=="all" && +sel!==i);
+      s+='<rect x="'+xs(r.t0).toFixed(1)+'" y="'+PY+'" width="'+(xs(r.t1)-xs(r.t0)).toFixed(1)+'" height="'+(PB-PY)+'" fill="'+(i%2?accent:mute)+'" opacity="'+(dim?0.02:0.06)+'"/>';
+    });
+    // gridlines + y labels
+    for(var g=0; g<=4; g++){
+      var val=minY+(maxY-minY)*g/4, y=ys(val);
+      s+='<line x1="'+PX+'" y1="'+y.toFixed(1)+'" x2="'+(VW-14)+'" y2="'+y.toFixed(1)+'" stroke="'+line+'" stroke-width="1" opacity=".6"/>';
+      s+='<text x="'+(PX-6)+'" y="'+(y+3).toFixed(1)+'" text-anchor="end" font-size="9" fill="'+mute+'">'+Math.round(val)+'</text>';
+    }
+    // x axis phase ticks
+    S.phases.forEach(function(p,i){ var mid=(pranges[i].t0+pranges[i].t1)/2; s+='<text x="'+xs(mid).toFixed(1)+'" y="'+(PB+16)+'" text-anchor="middle" font-size="8" fill="'+mute+'">'+p.name.split(" ")[0].slice(0,6)+'</text>'; });
+    // line, colour-split by selection
+    var col = metric==="speed" ? accent : hot;
+    var pts = S.series;
+    for(var i=1;i<pts.length;i++){
+      var a=pts[i-1], b=pts[i];
+      var dim = (sel!=="all" && b.p!==+sel);
+      s+='<line x1="'+xs(a.t).toFixed(1)+'" y1="'+ys(a[key]).toFixed(1)+'" x2="'+xs(b.t).toFixed(1)+'" y2="'+ys(b[key]).toFixed(1)+'" stroke="'+col+'" stroke-width="'+(dim?1:2)+'" stroke-linecap="round" opacity="'+(dim?0.18:0.95)+'"/>';
+    }
+    // hover layer
+    s+='<g id="hov" style="display:none"><line id="hovL" y1="'+PY+'" y2="'+PB+'" stroke="'+line2+'" stroke-width="1"/><circle id="hovC" r="3.5" fill="'+col+'"/><rect id="hovB" rx="4" height="18" fill="'+accent+'"/><text id="hovT" font-size="10" fill="#fff" text-anchor="middle" dy="12"></text></g>';
+    s+='<rect id="hit" x="'+PX+'" y="'+PY+'" width="'+(VW-PX-14)+'" height="'+(PB-PY)+'" fill="transparent" style="cursor:crosshair"/>';
+    chart.innerHTML=s;
+    attachHover(key,ys,col);
+  }
+
+  function attachHover(key,ys,col){
+    var hit=document.getElementById("hit"), hov=document.getElementById("hov");
+    var L=document.getElementById("hovL"), C=document.getElementById("hovC"), B=document.getElementById("hovB"), T=document.getElementById("hovT");
+    function pt(evt){
+      var r=chart.getBoundingClientRect(), x=(evt.clientX-r.left)/r.width*VW;
+      var best=null,bd=1e9;
+      S.series.forEach(function(d){ var dx=Math.abs(xs(d.t)-x); if(dx<bd){bd=dx;best=d;} });
+      if(!best) return;
+      var X=xs(best.t), Y=ys(best[key]);
+      L.setAttribute("x1",X); L.setAttribute("x2",X); C.setAttribute("cx",X); C.setAttribute("cy",Y);
+      var label=(key==="v"?best.v+" km/h":best.hr+" bpm")+"  ·  "+best.t.toFixed(0)+"′";
+      T.textContent=label; var w=label.length*5.6+14;
+      T.setAttribute("x",X); T.setAttribute("y",PY-2);
+      B.setAttribute("x",X-w/2); B.setAttribute("y",PY-4); B.setAttribute("width",w);
+      hov.style.display="block";
+    }
+    hit.addEventListener("mousemove",pt);
+    hit.addEventListener("mouseleave",function(){ hov.style.display="none"; });
+  }
+
+  document.getElementById("mSpeed").onclick=function(){ metric="speed"; render(); };
+  document.getElementById("mHr").onclick=function(){ metric="hr"; render(); };
+  window.__redrawPitch=render; // repaint on theme toggle
+  render();
+})();
+</script>
+</body>
+</html>

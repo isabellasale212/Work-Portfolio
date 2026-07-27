@@ -4,6 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GPS Session Physical Report — Isabella Sale</title>
+<meta name="description" content="Turning athlete GPS and wearable data into load monitoring, session reports and readiness — with Python, Power BI and Excel. BSc Sport & Exercise Science, University of Bath.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="GPS Session Physical Report — Isabella Sale">
+<meta property="og:description" content="Turning athlete GPS and wearable data into load monitoring, session reports and readiness — with Python, Power BI and Excel. BSc Sport & Exercise Science, University of Bath.">
+<meta property="og:image" content="https://isabellasale212.github.io/Work-Portfolio/assets/og-image.png">
+<meta property="og:url" content="https://isabellasale212.github.io/Work-Portfolio/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://isabellasale212.github.io/Work-Portfolio/assets/og-image.png">
+
 <link rel="stylesheet" href="../assets/site.css">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%231C4E7C%27/%3E%3Ctext x=%2716%27 y=%2722%27 font-family=%27Helvetica,Arial,sans-serif%27 font-size=%2714%27 font-weight=%27700%27 fill=%27white%27 text-anchor=%27middle%27%3EIS%3C/text%3E%3C/svg%3E">
 </head>
@@ -95,6 +104,53 @@
     </section>
 
     <section class="cs-block">
+      <h2>The code</h2>
+      <div class="prose">
+        <p>The heart of the pipeline: speed-zone distance is the <strong>time-integral of velocity within each band</strong> (<code>Σ v·Δt</code>), and phase demand falls out of a single <code>groupby</code>. Clean, documented, and reproducible from one command.</p>
+      </div>
+      <div class="code">
+        <div class="chd"><span class="dots"><i style="background:#E0655E"></i><i style="background:#E1B061"></i><i style="background:#5FB07C"></i></span><span>session_report.py</span></div>
+<pre><span class="kw">def</span> <span class="fn">summarise</span>(df):
+    <span class="cmt"># distance per speed zone: integrate velocity over time within each band</span>
+    step = df[<span class="str">"vel_ms"</span>] * dt
+    zone_dist = {}
+    <span class="kw">for</span> name, lo, hi <span class="kw">in</span> ZONES:
+        mask = (df[<span class="str">"vel_kmh"</span>] &gt;= lo) &amp; (df[<span class="str">"vel_kmh"</span>] &lt; hi)
+        zone_dist[name] = float(step[mask].sum())
+
+    hsr = float(step[df[<span class="str">"vel_kmh"</span>] &gt;= 19.8].sum())   <span class="cmt"># high-speed running</span>
+
+    <span class="kw">return</span> {
+        <span class="str">"total_distance_m"</span>:    round(total_distance),
+        <span class="str">"work_rate_m_per_min"</span>: round(total_distance / duration_min),
+        <span class="str">"peak_speed_kmh"</span>:      round(df[<span class="str">"vel_kmh"</span>].max(), 1),
+        <span class="str">"player_load_au"</span>:      round(df[<span class="str">"player_load"</span>].iloc[-1]),
+        <span class="str">"avg_hr_bpm"</span>:          round(df[<span class="str">"hr"</span>].mean()),
+        <span class="str">"zone_distance_m"</span>:     {k: round(v) <span class="kw">for</span> k, v <span class="kw">in</span> zone_dist.items()},
+    }
+
+<span class="kw">def</span> <span class="fn">per_phase</span>(df):
+    <span class="cmt"># split the session on Catapult's phase flag, then aggregate</span>
+    g = df.groupby(<span class="str">"phase"</span>, sort=<span class="kw">False</span>)
+    <span class="kw">return</span> pd.DataFrame({
+        <span class="str">"distance_m"</span>:     g[<span class="str">"odometer"</span>].last() - g[<span class="str">"odometer"</span>].first(),
+        <span class="str">"peak_speed_kmh"</span>: g[<span class="str">"vel_kmh"</span>].max().round(1),
+    })</pre>
+      </div>
+      <div class="code" style="margin-top:16px">
+        <div class="chd"><span class="dots"><i style="background:#E0655E"></i><i style="background:#E1B061"></i><i style="background:#5FB07C"></i></span><span>terminal — actual output</span></div>
+<pre><span class="cmt">$ python session_report.py</span>
+Total distance      8,382 m
+Work rate           140 m/min
+Peak speed          21.0 km/h
+Player Load         796 au
+Heart rate          138 avg / 167 max bpm
+High-speed running  4 m  (&gt;19.8 km/h)</pre>
+      </div>
+      <p class="code-cap">Excerpt from the full script — parsing, five-zone classification, Player Load and HR, plus chart generation. Every number on this page is produced by running it.</p>
+    </section>
+
+    <section class="cs-block">
       <h2>Why it matters</h2>
       <div class="prose">
         <p>A report like this is the daily unit of a performance department. Delivered consistently, it lets staff <strong>compare today against an athlete’s norm</strong>, spot who is over- or under-running, and feed accurate load into the weekly plan. Because it’s scripted rather than hand-built in a spreadsheet, it takes seconds to run on the next session and never drifts.</p>
@@ -106,7 +162,7 @@
         <div class="k"><div class="n tnum">21.0<small> km/h</small></div><div class="l">peak speed</div></div>
         <div class="k"><div class="n tnum">796<small> au</small></div><div class="l">Player Load</div></div>
       </div>
-      <div class="demo-banner"><span>▸</span><span>The full, runnable Python — with README and sample data — is on GitHub: <b>github.com/isabellasale212/gps-session-analysis</b> <i>(push the local repo to make this link live)</i>.</span></div>
+      <div class="demo-banner"><span>▸</span><span><b>See the full analysis:</b> the complete <a href="https://github.com/isabellasale212/Work-Portfolio/blob/main/notebooks/gps_session_analysis.ipynb" style="color:var(--accent)">Jupyter notebook</a> — code and charts, rendered on GitHub — and the reproducible <a href="https://github.com/isabellasale212/Work-Portfolio/blob/main/code/session_report.py" style="color:var(--accent)">Python script</a>.</span></div>
     </section>
 
     <nav class="cs-nav">

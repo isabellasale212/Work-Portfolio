@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Readiness &amp; Recovery Tracker — Isabella Sale</title>
+<meta name="description" content="Turning athlete GPS and wearable data into load monitoring, session reports and readiness — with Python, Power BI and Excel. BSc Sport & Exercise Science, University of Bath.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Readiness &amp; Recovery Tracker — Isabella Sale">
+<meta property="og:description" content="Turning athlete GPS and wearable data into load monitoring, session reports and readiness — with Python, Power BI and Excel. BSc Sport & Exercise Science, University of Bath.">
+<meta property="og:image" content="https://isabellasale212.github.io/Work-Portfolio/assets/og-image.png">
+<meta property="og:url" content="https://isabellasale212.github.io/Work-Portfolio/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://isabellasale212.github.io/Work-Portfolio/assets/og-image.png">
+
+<link rel="stylesheet" href="../assets/site.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%231C4E7C%27/%3E%3Ctext x=%2716%27 y=%2722%27 font-family=%27Helvetica,Arial,sans-serif%27 font-size=%2714%27 font-weight=%27700%27 fill=%27white%27 text-anchor=%27middle%27%3EIS%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap bar-in">
+    <a class="backlink" href="../index.html">← Isabella Sale · Portfolio</a>
+    <nav>
+      <a class="navlink" href="../index.html#work">All work</a>
+      <a class="navlink" href="../index.html#contact">Contact</a>
+      <button class="theme-btn" id="theme" aria-label="Toggle colour theme">Theme</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="cs-hero">
+    <div class="cs-topline">
+      <span class="idx" style="font-size:12px">04 / Readiness</span>
+      <span class="prov demo"><span class="d"></span> Method demo · wearable data</span>
+    </div>
+    <h1>Readiness &amp; Recovery Tracker</h1>
+    <p class="sub">A no-code Excel workbook staff open every morning — five quick wellness inputs per athlete become one readiness score and a red/amber/green grid that flags who needs a modified session before training starts.</p>
+    <div class="cs-meta">
+      <div class="m"><div class="mk">Role</div><div class="mv">Tool design</div></div>
+      <div class="m"><div class="mk">Tools</div><div class="mv">Excel · Power Query · formulas</div></div>
+      <div class="m"><div class="mk">Method</div><div class="mv">Per-athlete z-scores</div></div>
+      <div class="m"><div class="mk">Modelled on</div><div class="mv">WHOOP recovery exports</div></div>
+    </div>
+    <div class="demo-banner"><span>▸</span><span><b>Why this is a demonstration:</b> built to model a WHOOP recovery export (sleep, HRV, strain). Once my own WHOOP data is attached it becomes a real, personal dataset — the scoring logic is unchanged.</span></div>
+  </section>
+
+  <div class="cs-body">
+
+    <section class="cs-block">
+      <h2>The problem</h2>
+      <p class="lead">Wellness questionnaires are only useful if staff can read them in the 10 minutes before a session — and if “6/10 sleep” is judged against that athlete’s own normal, not a squad average.</p>
+      <div class="prose">
+        <p>This workbook keeps the athlete’s job to five taps — <strong>sleep, soreness, stress, fatigue and HRV-based recovery</strong> — and does all the interpretation itself, so coaches get a decision, not a spreadsheet.</p>
+      </div>
+    </section>
+
+    <section class="cs-block">
+      <h2>The morning grid</h2>
+      <div class="prose">
+        <p>Each input is <strong>z-scored against that person’s own 7-day baseline</strong>, combined into a single readiness score, and coloured green–amber–red. A coach scans one grid and instantly sees who to check on.</p>
+      </div>
+      <figure class="cs-fig">
+        <div class="frame"><img src="../assets/readiness_heatmap.png" alt="Readiness heatmap grid, athletes by days, coloured green amber and red"></div>
+        <figcaption>Squad readiness across a week. Red cells surface athletes whose combined wellness has dropped below their own baseline. <b>(Demonstration data.)</b></figcaption>
+      </figure>
+    </section>
+
+    <section class="cs-block">
+      <h2>What it shows</h2>
+      <div class="prose">
+        <ul>
+          <li><b>Per-athlete normalisation</b> — z-scoring against a rolling personal baseline, so flags are individual, not one-size-fits-all.</li>
+          <li><b>Zero-code delivery</b> — athletes only type inputs; scoring and colour are automated with Power Query and conditional formatting.</li>
+          <li><b>Designed for adoption</b> — 30 seconds to log, one glance to read. The tool that gets used beats the clever one that doesn’t.</li>
+        </ul>
+      </div>
+      <div class="callout">
+        <div class="ct">Result (demo)</div>
+        <p><strong>4 red flags</strong> across the week — each an athlete whose readiness dropped below their personal baseline and who’d be worth a modified warm-up or a quick check-in.</p>
+      </div>
+    </section>
+
+    <nav class="cs-nav">
+      <a href="03-acwr-load.html">← Training Load Monitor</a>
+      <a href="05-lacrosse-app.html">Next: Lacrosse Team App →</a>
+    </nav>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot-in">
+    <span>© 2026 Isabella Sale</span>
+    <span>Python · Power BI · Excel · GPS</span>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>

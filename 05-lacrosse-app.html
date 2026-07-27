@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lacrosse Team Performance App — Isabella Sale</title>
+<meta name="description" content="Turning athlete GPS and wearable data into load monitoring, session reports and readiness — with Python, Power BI and Excel. BSc Sport & Exercise Science, University of Bath.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lacrosse Team Performance App — Isabella Sale">
+<meta property="og:description" content="Turning athlete GPS and wearable data into load monitoring, session reports and readiness — with Python, Power BI and Excel. BSc Sport & Exercise Science, University of Bath.">
+<meta property="og:image" content="https://isabellasale212.github.io/Work-Portfolio/assets/og-image.png">
+<meta property="og:url" content="https://isabellasale212.github.io/Work-Portfolio/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://isabellasale212.github.io/Work-Portfolio/assets/og-image.png">
+
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%231C4E7C%27/%3E%3Ctext x=%2716%27 y=%2722%27 font-family=%27Helvetica,Arial,sans-serif%27 font-size=%2714%27 font-weight=%27700%27 fill=%27white%27 text-anchor=%27middle%27%3EIS%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap bar-in">
+    <a class="backlink" href="../index.html">← Isabella Sale · Portfolio</a>
+    <nav>
+      <a class="navlink" href="../index.html#work">All work</a>
+      <a class="navlink" href="../index.html#contact">Contact</a>
+      <button class="theme-btn" id="theme" aria-label="Toggle colour theme">Theme</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="cs-hero">
+    <div class="cs-topline">
+      <span class="idx" style="font-size:12px">05 / Applied project</span>
+      <span class="prov real"><span class="d"></span> Real project · built for a team</span>
+    </div>
+    <h1>Lacrosse Team Performance App</h1>
+    <p class="sub">A working mobile app I built to run a university women’s lacrosse squad in one place — training schedule, daily athlete check-ins, player profiles, matches and a coaching playbook, all driven by a relational data backend.</p>
+    <div class="cs-meta">
+      <div class="m"><div class="mk">Role</div><div class="mv">Data model, build &amp; rollout</div></div>
+      <div class="m"><div class="mk">Build</div><div class="mv">No-code app · Google Sheets backend</div></div>
+      <div class="m"><div class="mk">Users</div><div class="mv">A full squad, 2025–26 season</div></div>
+      <div class="m"><div class="mk">Screens</div><div class="mv">5 · relational data</div></div>
+    </div>
+  </section>
+
+  <div class="cs-body">
+
+    <section class="cs-block">
+      <h2>The brief</h2>
+      <p class="lead">A student sports team runs on scattered group chats and spreadsheets — the schedule in one place, wellness check-ins in another, drills nowhere. I built a single app that pulls it together and, crucially, captures athlete-monitoring data the coaches can actually use.</p>
+      <div class="prose">
+        <p>The app gives every player five things in their pocket: <strong>this week’s sessions, a 30-second daily check-in, their own profile and stats, upcoming matches, and the coaching playbook</strong>. Behind it sits a relational data model that turns each of those into a live screen.</p>
+      </div>
+    </section>
+
+    <section class="cs-block">
+      <h2>The app</h2>
+      <div class="prose">
+        <p>Five screens, each reading from its own data table. The check-in feeds a monitoring log; profiles pull a player’s stats and their linked check-in history; the playbook stores drills with diagrams the coaches can pull up pitch-side.</p>
+      </div>
+      <div class="cs-phones">
+        <figure><img src="../assets/lax_checkin.png" alt="Athlete monitoring / check-in screen listing soreness by date"><div class="pcap">Check-in &amp; monitoring</div></figure>
+        <figure><img src="../assets/lax_profile.png" alt="Player profile screen with position, fitness score, goals and related monitorings"><div class="pcap">Player profile</div></figure>
+        <figure><img src="../assets/lax_schedule.png" alt="Training schedule screen showing weekly sessions"><div class="pcap">Training schedule</div></figure>
+        <figure><img src="../assets/lax_playbook.png" alt="Playbook screen showing lacrosse drills with diagrams"><div class="pcap">Coaching playbook</div></figure>
+      </div>
+    </section>
+
+    <section class="cs-block">
+      <h2>The data model behind it</h2>
+      <div class="prose">
+        <p>The app is only as good as its data design. I modelled the squad as linked tables — a <strong>Players</strong> table and a <strong>Monitoring</strong> table — each feeding a specific screen, with a relationship so a player’s profile can show their own <strong>16 related check-ins</strong>. That relational thinking is the same skill that underpins any BI model or analytics pipeline.</p>
+      </div>
+      <figure class="cs-fig">
+        <div class="frame"><img src="../assets/lax_data_monitoring.png" alt="Monitoring data table with player, date, soreness, stress, fatigue, sleep, hours and injury columns"></div>
+        <figcaption>The Monitoring table — daily soreness, stress, fatigue, sleep, hours slept and injury notes — which feeds the check-in and monitoring screens.</figcaption>
+      </figure>
+      <figure class="cs-fig">
+        <div class="frame"><img src="../assets/lax_data_players.png" alt="Players data table with name, position, 600m fitness test, goals and fines"></div>
+        <figcaption>The Players table — position, 600 m fitness test, goals and fines — feeding each player’s profile. <span style="color:var(--mute)">Data anonymised to Player A–E.</span></figcaption>
+      </figure>
+    </section>
+
+    <section class="cs-block">
+      <h2>Why it belongs in a data portfolio</h2>
+      <div class="prose">
+        <p>This is where the collection meets the analysis. The daily check-in captures exactly the inputs — <strong>soreness, stress, fatigue, sleep</strong> — that the <a href="04-readiness.html" style="color:var(--accent)">Readiness &amp; Recovery</a> project turns into a monitoring score. One project <strong>gathers</strong> athlete-monitoring data at source; the other <strong>interprets</strong> it. Together they show the full loop a performance department runs on.</p>
+        <ul>
+          <li><b>Relational data modelling</b> — normalised tables with a real player-to-monitoring relationship.</li>
+          <li><b>End-to-end delivery</b> — from data design to a working app in players’ hands.</li>
+          <li><b>Adoption-first design</b> — a check-in has to be fast, or athletes won’t do it; the data is only as good as compliance.</li>
+        </ul>
+      </div>
+      <div class="callout">
+        <div class="ct">The takeaway</div>
+        <p>I don’t just analyse athlete-monitoring data — I’ve built the system that <strong>collects</strong> it, and understand the data model from the first check-in to the final report.</p>
+      </div>
+    </section>
+
+    <nav class="cs-nav">
+      <a href="04-readiness.html">← Readiness &amp; Recovery</a>
+      <a href="../index.html#work">All work →</a>
+    </nav>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot-in">
+    <span>© 2026 Isabella Sale</span>
+    <span>Python · Power BI · Excel · GPS</span>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>

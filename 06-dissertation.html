@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dissertation — Eccentric RFD &amp; Change of Direction — Isabella Sale</title>
+<meta name="description" content="Turning athlete GPS and wearable data into load monitoring, session reports and readiness — with Python, Power BI and Excel. BSc Sport & Exercise Science, University of Bath.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Dissertation — Eccentric RFD &amp; Change of Direction — Isabella Sale">
+<meta property="og:description" content="Turning athlete GPS and wearable data into load monitoring, session reports and readiness — with Python, Power BI and Excel. BSc Sport & Exercise Science, University of Bath.">
+<meta property="og:image" content="https://isabellasale212.github.io/Work-Portfolio/assets/og-image.png">
+<meta property="og:url" content="https://isabellasale212.github.io/Work-Portfolio/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://isabellasale212.github.io/Work-Portfolio/assets/og-image.png">
+
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%231C4E7C%27/%3E%3Ctext x=%2716%27 y=%2722%27 font-family=%27Helvetica,Arial,sans-serif%27 font-size=%2714%27 font-weight=%27700%27 fill=%27white%27 text-anchor=%27middle%27%3EIS%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap bar-in">
+    <a class="backlink" href="../index.html">← Isabella Sale · Portfolio</a>
+    <nav>
+      <a class="navlink" href="../index.html#work">All work</a>
+      <a class="navlink" href="../index.html#contact">Contact</a>
+      <button class="theme-btn" id="theme" aria-label="Toggle colour theme">Theme</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="cs-hero">
+    <div class="cs-topline">
+      <span class="idx" style="font-size:12px">Research · BSc dissertation</span>
+      <span class="prov real"><span class="d"></span> Primary research · original data</span>
+    </div>
+    <h1>Does jump-test power transfer to change-of-direction braking?</h1>
+    <p class="sub">A force-plate study of 20 university athletes testing whether eccentric rate of force development (RFD) from jump tests reflects the braking demands of a 180° change of direction — and whether it predicts change-of-direction speed.</p>
+    <div class="cs-meta">
+      <div class="m"><div class="mk">Award</div><div class="mv">BSc (Hons) Sport &amp; Exercise Science</div></div>
+      <div class="m"><div class="mk">Institution</div><div class="mv">University of Bath</div></div>
+      <div class="m"><div class="mk">Supervisor</div><div class="mv">Dr Adam Brazil</div></div>
+      <div class="m"><div class="mk">Sample</div><div class="mv">n = 20 · force plates 2000 Hz</div></div>
+    </div>
+  </section>
+
+  <div class="cs-body">
+
+    <section class="cs-block" style="border-top:0;padding-top:10px">
+      <h2>The question</h2>
+      <p class="lead">Change-of-direction (COD) speed is a decisive quality in multidirectional sport, and the deceleration — the eccentric “braking” — is its hardest phase. Practitioners routinely profile athletes with jump tests and assume the qualities transfer. Do they?</p>
+      <div class="prose">
+        <p>I tested whether eccentric RFD from three jumps — <strong>countermovement (CMJ), drop (DJ) and broad (BJ)</strong> — reflects the eccentric braking RFD measured during a <strong>505 change-of-direction</strong> task, and whether those jump qualities relate to 505 performance.</p>
+      </div>
+    </section>
+
+    <section class="cs-block">
+      <h2>Method</h2>
+      <div class="prose">
+        <ul>
+          <li><b>20 BUCS athletes</b> (age 21 ± 1.3 yr, 1.78 ± 0.07 m, 74.1 ± 13.6 kg).</li>
+          <li><b>3D motion capture (Qualisys, 200 Hz) with force plates (2000 Hz)</b>, modelled in Visual3D — RFD computed as ΔForce / ΔTime from the vertical force trace.</li>
+          <li><b>Four tasks:</b> CMJ, DJ, BJ and a 505 COD, with a best-trial selection criterion (CMJ jump height, DJ RSI, BJ distance, fastest 505).</li>
+          <li><b>Statistics:</b> Pearson / Spearman correlations, independent t-tests / Mann–Whitney for fast-vs-slow groups, and repeated-measures ANOVA for task differences in RFD.</li>
+        </ul>
+      </div>
+      <div class="code" style="margin-top:24px">
+        <div class="chd"><span class="dots"><i style="background:#E0655E"></i><i style="background:#E1B061"></i><i style="background:#5FB07C"></i></span><span>signal processing — force-plate RFD</span></div>
+<pre><span class="cmt"># eccentric rate of force development from a 2000 Hz force trace</span>
+dt = 1 / 2000                      <span class="cmt"># 2000 Hz sampling</span>
+rfd = np.gradient(force, dt)       <span class="cmt"># ΔForce / ΔTime</span>
+peak_rfd = rfd[brake_start:brake_end].max()   <span class="cmt"># braking phase only</span></pre>
+      </div>
+      <p class="code-cap">Illustrative of the RFD computation applied to each athlete’s force-time trace.</p>
+      <figure class="cs-fig" style="margin-top:32px">
+        <div class="frame"><img src="../assets/diss_qualisys.jpg" alt="Qualisys Track Manager showing a 44-marker 3D reconstruction over a force plate with Fx/Fy/Fz force traces"></div>
+        <figcaption>My own data collection: a <b>44-marker 3D reconstruction in Qualisys Track Manager</b> over the force plate, with the live Fx/Fy/Fz force traces (right). The project tree lists the real trial files captured for the study — CMJ, DJ, BJ and 505.</figcaption>
+      </figure>
+    </section>
+
+    <section class="cs-block">
+      <h2>Results</h2>
+      <div class="prose">
+        <p>One jump quality related to COD <strong>performance</strong>: a significant negative correlation between CMJ peak RFD and 505 time — faster athletes produced force more rapidly. But no jump-derived RFD reflected the 505’s <strong>braking</strong> RFD, and RM-ANOVA showed large, task-specific differences in RFD.</p>
+      </div>
+      <div class="cs-kpis" style="gap:44px">
+        <div class="k"><div class="n tnum" style="color:var(--accent)">r = −0.55</div><div class="l">CMJ peak RFD ↔ 505 time (p = 0.014)</div></div>
+        <div class="k"><div class="n tnum">η²p = 0.77</div><div class="l">task-specific difference in RFD (RM-ANOVA)</div></div>
+        <div class="k"><div class="n tnum">n = 20</div><div class="l">athletes · 2000 Hz force plates</div></div>
+      </div>
+
+      <div class="cs-fig" style="margin-top:34px">
+        <div class="frame" style="background:var(--panel);padding:26px">
+          <svg viewBox="0 0 720 210" role="img" aria-label="Diagram: jump-test RFD does not transfer to change-of-direction braking RFD">
+            <!-- left box -->
+            <rect x="24" y="55" width="210" height="100" rx="12" fill="none" stroke="var(--line2)" stroke-width="1.5"/>
+            <text x="129" y="92" text-anchor="middle" font-family="var(--serif)" font-size="16" fill="var(--ink)">Jump tests</text>
+            <text x="129" y="114" text-anchor="middle" font-family="var(--mono)" font-size="10.5" fill="var(--mute)">CMJ · DJ · BJ</text>
+            <text x="129" y="132" text-anchor="middle" font-family="var(--mono)" font-size="10.5" fill="var(--mute)">eccentric RFD</text>
+            <!-- right box -->
+            <rect x="486" y="55" width="210" height="100" rx="12" fill="none" stroke="var(--line2)" stroke-width="1.5"/>
+            <text x="591" y="92" text-anchor="middle" font-family="var(--serif)" font-size="16" fill="var(--ink)">505 change of direction</text>
+            <text x="591" y="114" text-anchor="middle" font-family="var(--mono)" font-size="10.5" fill="var(--mute)">braking RFD</text>
+            <text x="591" y="132" text-anchor="middle" font-family="var(--mono)" font-size="10.5" fill="var(--mute)">deceleration phase</text>
+            <!-- crossed arrow (no transfer) -->
+            <line x1="244" y1="105" x2="476" y2="105" stroke="var(--hot)" stroke-width="2" stroke-dasharray="7 5"/>
+            <line x1="348" y1="88" x2="372" y2="122" stroke="var(--hot)" stroke-width="2.5"/>
+            <line x1="372" y1="88" x2="348" y2="122" stroke="var(--hot)" stroke-width="2.5"/>
+            <text x="360" y="150" text-anchor="middle" font-family="var(--mono)" font-size="10.5" fill="var(--hot)">does not transfer</text>
+            <text x="360" y="40" text-anchor="middle" font-family="var(--mono)" font-size="10.5" fill="var(--mute)">task-specific: unilateral · horizontal · high-velocity</text>
+          </svg>
+        </div>
+        <figcaption>The central finding: eccentric RFD is largely task-specific — jump braking and COD braking are mechanically different demands.</figcaption>
+      </div>
+    </section>
+
+    <section class="cs-block">
+      <h2>Conclusion &amp; implication</h2>
+      <div class="callout">
+        <div class="ct">What it means for practice</div>
+        <p>Eccentric RFD is a <strong>non-transferable</strong> quality. Practitioners should profile deceleration with <strong>COD-specific force-plate braking metrics</strong> — such as horizontal braking impulse — rather than inferring it from jump tests.</p>
+      </div>
+      <div class="prose">
+        <p>The result matters because it challenges a common shortcut in athlete testing: that a countermovement jump can stand in for change-of-direction braking. It can’t, and the data says so cleanly.</p>
+        <p style="margin-top:18px;color:var(--mute);font-style:italic">Marker feedback: “a very good introduction… a well-written abstract that clearly overviews core aspects of the study… methods that would allow for [most core aspects to be] replicated.”</p>
+      </div>
+    </section>
+
+    <section class="cs-block">
+      <h2>Why it’s in a data portfolio</h2>
+      <div class="prose">
+        <p>This is the deepest quantitative work here: <strong>high-frequency signal processing</strong> (2000 Hz force traces), <strong>feature engineering</strong> (RFD, RSI, impulse), and <strong>inferential statistics</strong> (correlation, group comparison, RM-ANOVA) — carried end-to-end, from data collection to a defensible conclusion. It’s the same analytical spine as the GPS work, one level more rigorous.</p>
+      </div>
+    </section>
+
+    <nav class="cs-nav">
+      <a href="../index.html#work">← All projects</a>
+      <a href="../index.html#work">All work →</a>
+    </nav>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot-in">
+    <span>© 2026 Isabella Sale</span>
+    <span>Python · Power BI · Excel · GPS</span>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>
