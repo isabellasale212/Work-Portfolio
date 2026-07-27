@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GPS Session Physical Report — Isabella Sale</title>
+<link rel="stylesheet" href="../assets/site.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%231C4E7C%27/%3E%3Ctext x=%2716%27 y=%2722%27 font-family=%27Helvetica,Arial,sans-serif%27 font-size=%2714%27 font-weight=%27700%27 fill=%27white%27 text-anchor=%27middle%27%3EIS%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap bar-in">
+    <a class="backlink" href="../index.html">← Isabella Sale · Portfolio</a>
+    <nav>
+      <a class="navlink" href="../index.html#work">All work</a>
+      <a class="navlink" href="../index.html#contact">Contact</a>
+      <button class="theme-btn" id="theme" aria-label="Toggle colour theme">Theme</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="cs-hero">
+    <div class="cs-topline">
+      <span class="idx" style="font-size:12px">01 / Session profiling</span>
+      <span class="prov real"><span class="d"></span> Real data · Catapult 10 Hz</span>
+    </div>
+    <h1>GPS Session Physical Report</h1>
+    <p class="sub">A raw 36,000-row Catapult GPS export, turned into the one-page physical summary a sports scientist hands to coaches after every session — reproducible from a single command.</p>
+    <div class="cs-meta">
+      <div class="m"><div class="mk">Role</div><div class="mv">Data analysis &amp; reporting</div></div>
+      <div class="m"><div class="mk">Tools</div><div class="mv">Python · pandas · matplotlib</div></div>
+      <div class="m"><div class="mk">Data</div><div class="mv">Catapult 10 Hz · 60 min</div></div>
+      <div class="m"><div class="mk">Output</div><div class="mv">Summary + charts + CSV</div></div>
+    </div>
+  </section>
+
+  <div class="cs-body">
+
+    <section class="cs-block">
+      <h2>The brief</h2>
+      <p class="lead">GPS units capture an athlete’s every step at 10 samples a second — but a coach can’t read 36,000 rows of latitude and velocity. They need four or five numbers that say how hard the session was and where the load sat.</p>
+      <div class="prose">
+        <p>This project takes a single training session’s raw export and produces that summary automatically: <strong>total distance, work rate, speed-zone distribution, Player Load and heart-rate response</strong> — the standard physical KPIs used across professional team sport.</p>
+      </div>
+    </section>
+
+    <section class="cs-block">
+      <h2>The raw signal</h2>
+      <div class="prose">
+        <p>The starting point is the athlete’s movement itself. Plotting the raw latitude/longitude and colouring each step by speed shows the full session at a glance — the cool blue of recovery jogging, the warm and red bursts of high-speed efforts.</p>
+      </div>
+      <figure class="cs-fig">
+        <div class="frame"><img src="../assets/gps_movement_trace.png" alt="Player movement trace from real 10 Hz GPS, coloured by running speed"></div>
+        <figcaption>Every position sample from the 60-minute session, plotted from real latitude/longitude and coloured by running speed (0–21 km/h).</figcaption>
+      </figure>
+    </section>
+
+    <section class="cs-block">
+      <h2>What I did</h2>
+      <div class="prose">
+        <ul>
+          <li><b>Parsed &amp; cleaned</b> the Catapult export (a title line sits above the header; column names vary between exports, so matching is lenient).</li>
+          <li><b>Integrated velocity to distance</b> and classified every 0.1 s sample into five speed zones — computing zone distance as <code>Σ v·Δt</code>, not by naive sample-counting.</li>
+          <li><b>Accumulated Player Load and heart-rate</b> response across the session.</li>
+          <li><b>Wrote the whole thing as a reproducible script</b> — one command regenerates the summary, the charts and machine-readable CSVs.</li>
+        </ul>
+      </div>
+      <div class="callout">
+        <div class="ct">Headline result</div>
+        <p><strong>8,382 m</strong> covered at a <strong>140 m/min</strong> work rate, peaking at <strong>21.0 km/h</strong>, for a Player Load of <strong>796 au</strong> and an average heart rate of <strong>138 bpm</strong>.</p>
+      </div>
+    </section>
+
+    <section class="cs-block">
+      <h2>Speed-zone distribution</h2>
+      <div class="prose">
+        <p>Breaking distance into speed bands is how staff judge <strong>what kind</strong> of running an athlete did, not just how much. This session was aerobic in character — the vast majority of distance sits in the jogging band, with a small but real high-speed component.</p>
+      </div>
+      <figure class="cs-fig">
+        <div class="frame"><img src="../assets/speed_zones.png" alt="Bar chart of distance covered in each speed zone"></div>
+        <figcaption>Distance by speed zone. 5,879 m of the 8,382 m total sits in the 6–12 km/h jogging band; 196 m was above 15 km/h.</figcaption>
+      </figure>
+      <div class="cs-figs2">
+        <figure class="cs-fig">
+          <div class="frame"><img src="../assets/velocity_time.png" alt="Velocity over the session"></div>
+          <figcaption>Velocity across the full session, with the high-speed-running threshold marked.</figcaption>
+        </figure>
+        <figure class="cs-fig">
+          <div class="frame"><img src="../assets/hr_response.png" alt="Heart-rate response over the session"></div>
+          <figcaption>Heart-rate response — the physiological cost behind the distance.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="cs-block">
+      <h2>Why it matters</h2>
+      <div class="prose">
+        <p>A report like this is the daily unit of a performance department. Delivered consistently, it lets staff <strong>compare today against an athlete’s norm</strong>, spot who is over- or under-running, and feed accurate load into the weekly plan. Because it’s scripted rather than hand-built in a spreadsheet, it takes seconds to run on the next session and never drifts.</p>
+        <p><strong>Skills demonstrated:</strong> time-series parsing, signal-to-metric feature engineering, sports-science domain modelling (speed zones, Player Load), and reproducible reporting with clean, readable Python.</p>
+      </div>
+      <div class="cs-kpis">
+        <div class="k"><div class="n tnum">8,382<small> m</small></div><div class="l">total distance</div></div>
+        <div class="k"><div class="n tnum">140<small> m/min</small></div><div class="l">work rate</div></div>
+        <div class="k"><div class="n tnum">21.0<small> km/h</small></div><div class="l">peak speed</div></div>
+        <div class="k"><div class="n tnum">796<small> au</small></div><div class="l">Player Load</div></div>
+      </div>
+      <div class="demo-banner"><span>▸</span><span>The full, runnable Python — with README and sample data — is on GitHub: <b>github.com/isabellasale212/gps-session-analysis</b> <i>(push the local repo to make this link live)</i>.</span></div>
+    </section>
+
+    <nav class="cs-nav">
+      <a href="../index.html">← All work</a>
+      <a href="02-phase-demand.html">Next: Session-Phase Demand →</a>
+    </nav>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot-in">
+    <span>© 2026 Isabella Sale</span>
+    <span>Python · Power BI · Excel · GPS</span>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>

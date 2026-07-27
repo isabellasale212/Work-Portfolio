@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session-Phase Demand Profile — Isabella Sale</title>
+<link rel="stylesheet" href="../assets/site.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%231C4E7C%27/%3E%3Ctext x=%2716%27 y=%2722%27 font-family=%27Helvetica,Arial,sans-serif%27 font-size=%2714%27 font-weight=%27700%27 fill=%27white%27 text-anchor=%27middle%27%3EIS%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap bar-in">
+    <a class="backlink" href="../index.html">← Isabella Sale · Portfolio</a>
+    <nav>
+      <a class="navlink" href="../index.html#work">All work</a>
+      <a class="navlink" href="../index.html#contact">Contact</a>
+      <button class="theme-btn" id="theme" aria-label="Toggle colour theme">Theme</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="cs-hero">
+    <div class="cs-topline">
+      <span class="idx" style="font-size:12px">02 / Matchday reporting</span>
+      <span class="prov real"><span class="d"></span> Real data · Catapult 10 Hz</span>
+    </div>
+    <h1>Session-Phase Demand Profile</h1>
+    <p class="sub">The same real session, broken down by coaching phase — so staff can see exactly where the physical demand sits across a session and balance the training week around it.</p>
+    <div class="cs-meta">
+      <div class="m"><div class="mk">Role</div><div class="mv">Dashboard &amp; reporting</div></div>
+      <div class="m"><div class="mk">Tools</div><div class="mv">Power BI · DAX · Power Query</div></div>
+      <div class="m"><div class="mk">Data</div><div class="mv">Catapult 10 Hz · 7 phases</div></div>
+      <div class="m"><div class="mk">Output</div><div class="mv">One-page squad dashboard</div></div>
+    </div>
+  </section>
+
+  <div class="cs-body">
+
+    <section class="cs-block">
+      <h2>The question</h2>
+      <p class="lead">A session total tells you how much an athlete did. It doesn’t tell you when — whether the load came from the warm-up, the conditioning block, or a hard small-sided game at the end.</p>
+      <div class="prose">
+        <p>Catapult tags every sample with a <strong>session phase</strong>. This project uses that flag to split the session into its coaching blocks and report distance and peak speed for each — the view a strength &amp; conditioning coach needs to structure the week and avoid stacking high-intensity blocks.</p>
+      </div>
+    </section>
+
+    <section class="cs-block">
+      <h2>Where the demand sat</h2>
+      <div class="prose">
+        <p>Two blocks dominate the running: the <strong>warm-up</strong> (1,868 m of continuous movement) and the <strong>small-sided game</strong> (1,768 m). But distance alone is misleading — colouring each bar by peak speed shows the small-sided game and movement prep were where the <strong>high-velocity</strong> efforts happened, even though the warm-up covered more ground.</p>
+      </div>
+      <figure class="cs-fig">
+        <div class="frame"><img src="../assets/phase_distance.png" alt="Distance by session phase, bars coloured by peak speed"></div>
+        <figcaption>Distance covered in each of the seven phases, coloured by the peak speed reached in that block — distance and intensity read together.</figcaption>
+      </figure>
+    </section>
+
+    <section class="cs-block">
+      <h2>What I did</h2>
+      <div class="prose">
+        <ul>
+          <li><b>Segmented the feed</b> on the phase flag in Power Query, handling the raw export’s structure on import.</li>
+          <li><b>Wrote DAX measures</b> for distance (from the odometer) and peak speed per phase, so the numbers recompute automatically as filters change.</li>
+          <li><b>Designed a single-page read</b> — a coach sees the demand distribution in seconds, then can drill into any phase.</li>
+        </ul>
+        <p>The underlying segmentation is the same logic proven in the Python session report, re-expressed in a BI tool so non-technical staff can interact with it directly.</p>
+      </div>
+      <div class="callout">
+        <div class="ct">Insight</div>
+        <p>Peak speed of <strong>21.0 km/h</strong> came in <strong>movement prep</strong>, not the game — a reminder that warm-up design already exposes athletes to near-maximal velocity, which matters for hamstring-injury risk management.</p>
+      </div>
+    </section>
+
+    <section class="cs-block">
+      <h2>Why it matters</h2>
+      <div class="prose">
+        <p>Phase-level reporting turns a single number into a coaching conversation. It shows whether a session delivered its intended stimulus, where to trim volume, and how to sequence blocks so high-speed exposure is deliberate rather than accidental.</p>
+        <p><strong>Skills demonstrated:</strong> Power Query data shaping, DAX measure design, grouping/aggregation logic, and information design for a non-technical audience.</p>
+      </div>
+      <div class="cs-kpis">
+        <div class="k"><div class="n tnum">7</div><div class="l">session phases</div></div>
+        <div class="k"><div class="n tnum">1,768<small> m</small></div><div class="l">small-sided games</div></div>
+        <div class="k"><div class="n tnum">21.0<small> km/h</small></div><div class="l">peak (mvmt prep)</div></div>
+      </div>
+      <div class="demo-banner"><span>▸</span><span><b>Note on this build:</b> the analysis and figures come from the real Catapult session; the chart shown is generated from that data. A live Power BI <code>.pbix</code> can be provided on request.</span></div>
+    </section>
+
+    <nav class="cs-nav">
+      <a href="01-gps-session.html">← GPS Session Report</a>
+      <a href="03-acwr-load.html">Next: Training Load Monitor →</a>
+    </nav>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot-in">
+    <span>© 2026 Isabella Sale</span>
+    <span>Python · Power BI · Excel · GPS</span>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>

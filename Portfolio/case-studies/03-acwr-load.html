@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Training Load Monitor (ACWR) — Isabella Sale</title>
+<link rel="stylesheet" href="../assets/site.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%231C4E7C%27/%3E%3Ctext x=%2716%27 y=%2722%27 font-family=%27Helvetica,Arial,sans-serif%27 font-size=%2714%27 font-weight=%27700%27 fill=%27white%27 text-anchor=%27middle%27%3EIS%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap bar-in">
+    <a class="backlink" href="../index.html">← Isabella Sale · Portfolio</a>
+    <nav>
+      <a class="navlink" href="../index.html#work">All work</a>
+      <a class="navlink" href="../index.html#contact">Contact</a>
+      <button class="theme-btn" id="theme" aria-label="Toggle colour theme">Theme</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="cs-hero">
+    <div class="cs-topline">
+      <span class="idx" style="font-size:12px">03 / Load monitoring</span>
+      <span class="prov demo"><span class="d"></span> Method demo · synthetic data</span>
+    </div>
+    <h1>Training Load Monitor — ACWR</h1>
+    <p class="sub">A longitudinal injury-risk technique that a single session can’t show: rolling acute-to-chronic workload ratio across a 16-week block, flagging athlete-weeks that spike into the danger zone.</p>
+    <div class="cs-meta">
+      <div class="m"><div class="mk">Role</div><div class="mv">Analysis &amp; monitoring</div></div>
+      <div class="m"><div class="mk">Tools</div><div class="mv">Python · pandas · matplotlib</div></div>
+      <div class="m"><div class="mk">Method</div><div class="mv">Rolling 7 : 28-day ratio</div></div>
+      <div class="m"><div class="mk">Data</div><div class="mv">Simulated squad, 26 athletes</div></div>
+    </div>
+    <div class="demo-banner"><span>▸</span><span><b>Why this is a demonstration:</b> ACWR needs months of continuous daily load. My real GPS sample is a single session, so this uses realistic simulated data to show the <b>method</b> — the code runs identically on a real longitudinal feed.</span></div>
+  </section>
+
+  <div class="cs-body">
+
+    <section class="cs-block">
+      <h2>The idea</h2>
+      <p class="lead">The acute-to-chronic workload ratio compares how much an athlete has done recently against what they’re conditioned for. Ramp load too fast and injury risk climbs; the widely-used “sweet spot” is 0.8–1.3.</p>
+      <div class="prose">
+        <p>The metric is simple but the value is in doing it <strong>continuously, per athlete, across a whole squad</strong> — turning daily session loads into an early-warning flag before a spike becomes an injury.</p>
+      </div>
+    </section>
+
+    <section class="cs-block">
+      <h2>The monitor</h2>
+      <div class="prose">
+        <p>Each athlete’s daily load (session RPE × duration) feeds a rolling <strong>7-day acute</strong> and <strong>28-day chronic</strong> average; their ratio is tracked against the safe band. Any week that pushes above 1.5 is flagged red for review.</p>
+      </div>
+      <figure class="cs-fig">
+        <div class="frame"><img src="../assets/acwr.png" alt="ACWR line chart across 16 weeks with a safe band and flagged high-risk weeks"></div>
+        <figcaption>ACWR across a 16-week block. The green band is the 0.8–1.3 safe range; red points mark weeks that spiked above 1.5 and warrant a deload. <b>(Demonstration data.)</b></figcaption>
+      </figure>
+    </section>
+
+    <section class="cs-block">
+      <h2>What it shows</h2>
+      <div class="prose">
+        <ul>
+          <li><b>Rolling-window feature engineering</b> — acute and chronic loads with correct handling of the ramp-up period.</li>
+          <li><b>Threshold logic &amp; flagging</b> — automatically surfacing the weeks that need a coach’s eyes.</li>
+          <li><b>Squad-scale thinking</b> — the same pipeline runs across 26 athletes, not one.</li>
+        </ul>
+      </div>
+      <div class="callout">
+        <div class="ct">Result (demo)</div>
+        <p><strong>3 high-risk weeks</strong> flagged across the block against a squad mean ACWR of <strong>1.12</strong> — each one a prompt to modify the following week’s plan.</p>
+      </div>
+    </section>
+
+    <nav class="cs-nav">
+      <a href="02-phase-demand.html">← Session-Phase Demand</a>
+      <a href="04-readiness.html">Next: Readiness &amp; Recovery →</a>
+    </nav>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot-in">
+    <span>© 2026 Isabella Sale</span>
+    <span>Python · Power BI · Excel · GPS</span>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>
